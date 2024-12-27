@@ -6,7 +6,6 @@ public class Main {
         GetWord getWord = new GetWord();
         Game game = new Game(getWord.WriteTheWord());
         System.out.println("jogador 2 escreva uma letra: ");
-        Player player = new Player();
-        player.enterInput();
+        game.compare();
     }
 }

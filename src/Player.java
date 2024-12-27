@@ -6,6 +6,21 @@ public class Player {
     private int life = 6;
     private int points = 0;
 
+    public int getLife() {
+        return life;
+    }
+
+    public int decreaseLife(){
+        return --life;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+    public int increasePoints(){
+        return ++points;
+    }
+
     public Player( ) throws IOException {
 
     }
@@ -15,4 +30,8 @@ public class Player {
         String input = reader.readLine();
         return input;
     }
+    public String getUserInput() throws IOException {
+        return enterInput();
+    }
+
 }

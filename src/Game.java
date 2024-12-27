@@ -8,7 +8,20 @@ public class Game {
     Player player = new Player();
 
     public void compare() throws IOException {
-        String letra = player.enterInput();
+
+        while (player.getLife() != 0 && player.getPoints() != palavra.length()) {
+            String letras = player.getUserInput();
+            if (palavra.contains(letras)) {
+                System.out.println("tem");
+                player.increasePoints();
+                System.out.println("os pontos estão em :" + player.getPoints());
+            } else {
+                player.decreaseLife();
+                System.out.println("nao tem nao");
+                System.out.println("a vida está em :" + player.getLife());
+
+            }
+        }
     }
 
 }
