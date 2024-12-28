@@ -8,7 +8,7 @@ public class Main {
         GetWord instanciaDegetWord = new GetWord();
         //jogo registra a palavra
         Player player = new Player();
-        Game instanciaDegame = new Game(instanciaDegetWord.WriteTheWord(), player.getUserInput());
+        Game instanciaDegame = new Game(instanciaDegetWord.WriteTheWord());
         //jogador 2 escreve uma letra e jogo faz a comparação
         System.out.println("jogador 2 escreva uma letra: ");
         instanciaDegame.compare();

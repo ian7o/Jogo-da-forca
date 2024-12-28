@@ -1,10 +1,10 @@
 import java.io.IOException;
-import java.util.stream.Stream;
+
 
 public class Game {
     String palavra;
 
-    public Game(String palavra,String letra) throws IOException {
+    public Game(String palavra) throws IOException {
         this.palavra = palavra;
     }
 
