@@ -10,29 +10,28 @@ public class Player {
         return life;
     }
 
-    public int decreaseLife(){
+    public int decreaseLife() {
         return --life;
     }
 
     public int getPoints() {
         return points;
     }
-    public int increasePoints(){
+
+    public int increasePoints() {
         return ++points;
     }
 
-    public Player( ) throws IOException {
+    public Player() throws IOException {
 
     }
+    String letra;
 
     public String enterInput() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String input = reader.readLine();
-        return input;
+        letra = reader.readLine();
+        return letra;
     }
 
-    public String getUserInput() throws IOException {
-        return enterInput();
-    }
 
 }
