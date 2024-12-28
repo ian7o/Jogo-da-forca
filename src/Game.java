@@ -1,17 +1,19 @@
 import java.io.IOException;
+import java.util.stream.Stream;
 
 public class Game {
     String palavra;
-    public Game(String palavra) throws IOException {
-        this.palavra=palavra;
+
+    public Game(String palavra,String letra) throws IOException {
+        this.palavra = palavra;
     }
+
     Player player = new Player();
 
     public void compare() throws IOException {
-
         while (player.getLife() != 0 && player.getPoints() != palavra.length()) {
-            String letras = player.getUserInput();
-            if (palavra.contains(letras)) {
+            if (palavra.contains(player.getUserInput())) {
+
                 System.out.println("tem");
                 player.increasePoints();
                 System.out.println("os pontos estão em :" + player.getPoints());
@@ -23,5 +25,4 @@ public class Game {
             }
         }
     }
-
 }

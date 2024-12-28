@@ -30,6 +30,7 @@ public class Player {
         String input = reader.readLine();
         return input;
     }
+
     public String getUserInput() throws IOException {
         return enterInput();
     }
