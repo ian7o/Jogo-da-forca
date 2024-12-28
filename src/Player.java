@@ -14,7 +14,7 @@ public class Player {
         return --life;
     }
 
-    public int getPoints() {
+    public int getLetersQuantity() {
         return points;
     }
 
@@ -25,7 +25,7 @@ public class Player {
     public Player() throws IOException {
 
     }
-    String letra;
+    private String letra;
 
     public String enterInput() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -33,5 +33,7 @@ public class Player {
         return letra;
     }
 
-
+    public String getLetra() {
+        return letra;
+    }
 }
