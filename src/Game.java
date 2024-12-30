@@ -20,40 +20,38 @@ public class Game {
             if (registeredLetters.contains(player.getLetra())) {
                 System.out.println("já tentou com esta letra tenta outra letra");
             } else {
-                //nao adciona na lista se for uma letra vazia (enter)
-                if (!player.getLetra().isEmpty()){
-                registeredLetters.add(player.getLetra());
-                }
-                if (word.contains(player.getLetra())) {
-                    for (int i = 0; i < word.length(); i++) {
-                        //se nao escreveu nada
-                        if (player.getLetra().isEmpty()){
-                            System.out.println("tem que escrever alguma coisa");
-                            break;
-                        }
-                        else if (word.charAt(i) == player.getLetra().charAt(0)) {
-                            //fins de teste
-                            System.out.println("tem a letra na palavra");
-                            player.increaseCorrectLettersQuantity();
-
-                        } else {
-                            //fins de teste
-                            System.out.println("nao tem a letra na palavra");
-                        }
-                    }
-
-                    if (player.getCorrectLettersQuantity() == word.length()) {
-                        System.out.println();
-                        System.out.println("o jogador 2 venceu!!!");
-                    }
-                    System.out.println("acertou:" + player.getCorrectLettersQuantity() + " letras de " + word.length());
+                //se nao escreveu nada
+                if (player.getLetra().isEmpty()) {
+                    System.out.println("tem que escrever alguma coisa");
                 } else {
-                    player.decreaseLife();
-                    System.out.println("nao tem a letra");
-                    System.out.println("a vida está em :" + player.getLife());
+                    registeredLetters.add(player.getLetra());
+                    if (word.contains(player.getLetra())) {
+                        for (int i = 0; i < word.length(); i++) {
 
-                    if (player.getLife() == 0) {
-                        System.out.println("jogador 2 perdeu");
+                            if (word.charAt(i) == player.getLetra().charAt(0)) {
+                                //fins de teste
+                                System.out.println("tem a letra na palavra");
+                                player.increaseCorrectLettersQuantity();
+
+                            } else {
+                                //fins de teste
+                                System.out.println("nao tem a letra na palavra");
+                            }
+                        }
+
+                        if (player.getCorrectLettersQuantity() == word.length()) {
+                            System.out.println();
+                            System.out.println("o jogador 2 venceu!!!");
+                        }
+                        System.out.println("acertou:" + player.getCorrectLettersQuantity() + " letras de " + word.length());
+                    } else {
+                        player.decreaseLife();
+                        System.out.println("nao tem a letra");
+                        System.out.println("a vida está em :" + player.getLife());
+
+                        if (player.getLife() == 0) {
+                            System.out.println("jogador 2 perdeu");
+                        }
                     }
                 }
             }
