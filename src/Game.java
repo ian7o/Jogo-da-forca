@@ -18,9 +18,7 @@ public class Game {
                         //fins de teste
                         System.out.println("tem a letra");
                         player.increasePoints();
-                        if (player.getLetersQuantity() == palavra.length()) {
-                            System.out.println("o jogador 2 venceu!!!");
-                        }
+
                     } else {
                         //fins de teste
                         System.out.println("nao tem a letra");
@@ -32,11 +30,17 @@ public class Game {
                 player.decreaseLife();
                 System.out.println("nao tem a letra");
                 System.out.println("a vida está em :" + player.getLife());
-                if (player.getLife() == 0) {
-                    System.out.println("jogador 2 perdeu");
-                }
-            }
 
+            }
+        }
+    }
+
+    public void showWinnerOrLoser() {
+        if (player.getLetersQuantity() == palavra.length()) {
+            System.out.println("o jogador 2 venceu!!!");
+        }
+        if (player.getLife() == 0) {
+            System.out.println("jogador 2 perdeu");
         }
     }
 }

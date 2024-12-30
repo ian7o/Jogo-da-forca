@@ -12,5 +12,6 @@ public class Main {
         //jogador 2 escreve uma letra e jogo faz a comparação
         System.out.println("jogador 2 escreva uma letra: ");
         instanciaDegame.compare();
+        instanciaDegame.showWinnerOrLoser();
     }
 }
