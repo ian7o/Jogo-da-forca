@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class Player {
     private int life = 6;
-    private int points = 0;
+    private int correctLetters = 0;
 
     public int getLife() {
         return life;
@@ -14,12 +14,12 @@ public class Player {
         return --life;
     }
 
-    public int getLetersQuantity() {
-        return points;
+    public int getCorrectLettersQuantity() {
+        return correctLetters;
     }
 
-    public int increasePoints() {
-        return ++points;
+    public int increaseCorrectLettersQuantity() {
+        return ++correctLetters;
     }
 
     public Player() throws IOException {
