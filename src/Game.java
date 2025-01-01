@@ -11,31 +11,36 @@ public class Game {
     }
 
     List<String> registeredLetters = new ArrayList<>();
+    List<String> replaceforWordsList = new ArrayList<>();
 
+    public void fillSercretWord (){
+        for (int i = 0; i < word.length(); i++) {
+            replaceforWordsList.add("-");
+        }
+    }
     public void playGame() throws IOException {
+        fillSercretWord();
         while (player.getLife() != 0 && player.getCorrectLettersQuantity() != word.length()) {
-            player.enterInput();
-            //se contem na lista
+            player.playerEnterInput();
 
-            if (registeredLetters.contains(player.getLetra())) {
+            //se contem na lista
+            if (registeredLetters.contains(player.getPlayerLetter())) {
                 System.out.println("já tentou com esta letra tenta outra letra");
             } else {
                 //se nao escreveu nada
-                if (player.getLetra().isEmpty()) {
+                if (player.getPlayerLetter().isEmpty()) {
                     System.out.println("tem que escrever alguma coisa");
                 } else {
-                    registeredLetters.add(player.getLetra());
-                    if (word.contains(player.getLetra())) {
+                    registeredLetters.add(player.getPlayerLetter());
+                    if (word.contains(player.getPlayerLetter())) {
                         for (int i = 0; i < word.length(); i++) {
-
-                            if (word.charAt(i) == player.getLetra().charAt(0)) {
+                            if (word.charAt(i) == player.getPlayerLetter().charAt(0)) {
                                 //fins de teste
-                                System.out.println("tem a letra na palavra");
+
+
+                                replaceforWordsList.set(i, player.getPlayerLetter());
                                 player.increaseCorrectLettersQuantity();
 
-                            } else {
-                                //fins de teste
-                                System.out.println("nao tem a letra na palavra");
                             }
                         }
 
@@ -43,7 +48,11 @@ public class Game {
                             System.out.println();
                             System.out.println("o jogador 2 venceu!!!");
                         }
+                        System.out.println();
                         System.out.println("acertou:" + player.getCorrectLettersQuantity() + " letras de " + word.length());
+
+                        //imprimindo a forca
+                        System.out.println(replaceforWordsList);
                     } else {
                         player.decreaseLife();
                         System.out.println("nao tem a letra");

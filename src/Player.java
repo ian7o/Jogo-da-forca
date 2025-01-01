@@ -25,15 +25,16 @@ public class Player {
     public Player() throws IOException {
 
     }
-    private String letra;
 
-    public String enterInput() throws IOException {
+    private String Letter;
+
+    public String playerEnterInput() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        letra = reader.readLine();
-        return letra;
+        Letter = reader.readLine();
+        return Letter;
     }
 
-    public String getLetra() {
-        return letra;
+    public String getPlayerLetter() {
+        return Letter;
     }
 }
