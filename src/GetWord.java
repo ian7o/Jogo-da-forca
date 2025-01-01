@@ -1,9 +1,16 @@
 import java.io.*;
 
 public class GetWord {
-    public String WriteTheWord() throws IOException {
+    private String word;
+
+    public String writeTheWord() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        return reader.readLine();
+        word = reader.readLine().toLowerCase();
+        if (word.isEmpty()) {
+            System.out.println("tem que escrever alguma palavra");
+            writeTheWord();
+        }
+        return word;
     }
 
 }

@@ -30,7 +30,7 @@ public class Player {
 
     public String playerEnterInput() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Letter = reader.readLine();
+        Letter = reader.readLine().toLowerCase();
         return Letter;
     }
 
