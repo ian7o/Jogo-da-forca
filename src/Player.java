@@ -54,8 +54,13 @@ public class Player {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         //se for espaço vazio (enter)
         letter = reader.readLine().toLowerCase();
+
         if (letter.isEmpty()){
             System.out.println("tem que escrever alguma letra");
+            playerEnterInput();
+        }
+        if (letter.length()>1){
+            System.out.println("escreva apenas uma letra");
             playerEnterInput();
         }
         return letter;

@@ -11,6 +11,6 @@ public class Main {
         //jogador 2 escreve uma letra e jogo faz a comparação
         System.out.println("jogador 2 escreva a primeira letra: ");
         game.playGame();
-        game.showGameStatus();
+        game.showPlayerStatus();
     }
 }
