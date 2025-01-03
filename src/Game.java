@@ -22,8 +22,10 @@ public class Game {
 
     public void playGame() throws IOException {
         fillSercretWord();
+
         //enquanto o jogador estiver vivo ou não acertar todas as letras da palavra o jogo continua
-        while (player.getLife() != 0 && player.getCorrectLettersQuantity() != word.length()) {
+
+        while (player.getLife() != 0 && player.getCorrectLettersQuantity() != player.getWordSize()) {
             //escreve apenas se a lista não estiver vazia
             if (!registeredLetters.isEmpty()) {
                 System.out.println("Escreva outra letra:");
@@ -37,13 +39,18 @@ public class Game {
             } else {
                 //primeiro adiciona a letra para a lista de letras registradas
                 registeredLetters.add(player.getPlayerLetter());
-                // se a letra que do player conter na palavra
 
+                // se a letra do player conter na palavra
                 if (word.contains(player.getPlayerLetter())) {
                     System.out.println();
                     System.out.println("Tem a letra na palavra");
                     // vai em posição em posição e verifica se a letra digitada é igual a palavra
                     for (int i = 0; i < word.length(); i++) {
+                        // se a palavra conter um espaço substitui o traço por um espaço
+                        if (word.charAt(i) == ' ') {
+                            hangmanGame.set(i, " ");
+
+                        }
                         // se a letra da palavra for igual a letra do jogador substitui o - pela a letra no espaço correto
                         if (word.charAt(i) == player.getPlayerLetter().charAt(0)) {
                             hangmanGame.set(i, player.getPlayerLetter());
@@ -59,17 +66,16 @@ public class Game {
                 }
                 //imprimindo a forca
                 System.out.print("A palavra é ");
-
-                hangmanGame.forEach(i-> System.out.print(i));
+                hangmanGame.forEach(i -> System.out.print(i));
                 System.out.println();
             }
         }
     }
 
     public void showPlayerStatus() {
-        System.out.println("Acertou:" + player.getCorrectLettersQuantity() + " letras de " + word.length());
+        System.out.println("Acertou:" + player.getCorrectLettersQuantity() + " letras de " + player.getWordSize());
         // se a quantidade de letras corretas for igual ao tamanho da palavra o jogador vence
-        if (player.getCorrectLettersQuantity() == word.length()) {
+        if (player.getCorrectLettersQuantity() == player.getWordSize()) {
             System.out.println("O jogador 2 venceu!!!");
         }
         // se a vida do jogador for 0 ele perde

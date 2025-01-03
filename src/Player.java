@@ -5,24 +5,52 @@ import java.io.InputStreamReader;
 public class Player {
     private String word;
 
+    //    private int wordLength = word.length();
+    public String getWord() {
+        return word;
+    }
+
+    // tenho que so mudar em player na parte de vencer
+
     public String writeTheWord() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         word = reader.readLine().toLowerCase();
+        // armazenar o tamnho em um int
+        // se tiver espaço diminuir esse int
+        // la no outro metodo primeiro verifica se é um espaço se for so substititui por um espaço
+
         //se for espaço vazio (enter)
-        if (word.isEmpty()) {
-            System.out.println("tem que escrever alguma palavra");
+        if (word.trim().isEmpty()) {
+            System.out.println("Tem que escrever alguma palavra");
             writeTheWord();
         }
 
-        //se conter numeros
-        if (word.contains("1") || word.contains("2") || word.contains("3") || word.contains("4") || word.contains("5") || word.contains("6") || word.contains("7") || word.contains("8") || word.contains("9") || word.contains("0")) {
-            System.out.println("a palavra não pode conter numeros");
-            writeTheWord();
+        for (int i = 0; i < word.length(); i++) {
+            if (!Character.isLetter(word.charAt(i)) && !Character.isSpaceChar(word.charAt(i))) {
+                System.out.println("Esse caractere não foi aceito escreva outro ");
+                writeTheWord();
+            }
         }
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
         return word.trim();
+    }
+
+    private int wordSize;
+
+    public int countSpace() {
+        wordSize = word.length();
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) == ' ') {
+                wordSize--;
+            }
+        }
+        return wordSize;
+    }
+
+    public int getWordSize() {
+        return wordSize;
     }
 
     private int life = 6;
@@ -44,7 +72,7 @@ public class Player {
         return ++correctLetters;
     }
 
-    public Player() throws IOException {
+    public Player() {
 
     }
 
@@ -55,11 +83,11 @@ public class Player {
         //se for espaço vazio (enter)
         letter = reader.readLine().toLowerCase();
 
-        if (letter.isEmpty()){
+        if (letter.isEmpty()) {
             System.out.println("tem que escrever alguma letra");
             playerEnterInput();
         }
-        if (letter.length()>1){
+        if (letter.length() > 1) {
             System.out.println("escreva apenas uma letra");
             playerEnterInput();
         }
