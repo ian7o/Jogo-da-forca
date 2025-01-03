@@ -22,7 +22,7 @@ public class Player {
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
-        return word;
+        return word.trim();
     }
 
     private int life = 6;
