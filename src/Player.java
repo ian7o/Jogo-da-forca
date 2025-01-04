@@ -24,6 +24,7 @@ public class Player {
 
         return word.trim();
     }
+
     public void clearConsole(){
         for (int i = 0; i < 50; i++) {
             System.out.println();
@@ -34,7 +35,7 @@ public class Player {
     public int countWordWithoutSpaces() {
         wordSizeWithoutSpaces = word.length();
         for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) == ' ') {
+            if (Character.isSpaceChar(word.charAt(i))) {
                 wordSizeWithoutSpaces--;
             }
         }
@@ -88,5 +89,28 @@ public class Player {
 
     public String getPlayerLetter() {
         return letter;
+    }
+
+    private String choseOption;
+
+    public String getChoseOption() {
+        return choseOption;
+    }
+
+    public String playerChoseGameMode() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        //se for espaço vazio (enter)
+        choseOption = reader.readLine().toLowerCase();
+
+        if (choseOption.trim().isEmpty()) {
+            System.out.println("tem que escrever alguma opção");
+            playerChoseGameMode();
+        }
+
+        if (!Character.isDigit(choseOption.charAt(0))){
+            System.out.println("Esse caractere não foi aceito escreva outro");
+            playerChoseGameMode();
+        }
+        return choseOption;
     }
 }
