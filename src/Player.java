@@ -5,19 +5,9 @@ import java.io.InputStreamReader;
 public class Player {
     private String word;
 
-    //    private int wordLength = word.length();
-    public String getWord() {
-        return word;
-    }
-
-    // tenho que so mudar em player na parte de vencer
-
     public String writeTheWord() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         word = reader.readLine().toLowerCase();
-        // armazenar o tamnho em um int
-        // se tiver espaço diminuir esse int
-        // la no outro metodo primeiro verifica se é um espaço se for so substititui por um espaço
 
         //se for espaço vazio (enter)
         if (word.trim().isEmpty()) {
@@ -31,26 +21,28 @@ public class Player {
                 writeTheWord();
             }
         }
+
+        return word.trim();
+    }
+    public void clearConsole(){
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
-        return word.trim();
     }
+    private int wordSizeWithoutSpaces;
 
-    private int wordSize;
-
-    public int countSpace() {
-        wordSize = word.length();
+    public int countWordWithoutSpaces() {
+        wordSizeWithoutSpaces = word.length();
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == ' ') {
-                wordSize--;
+                wordSizeWithoutSpaces--;
             }
         }
-        return wordSize;
+        return wordSizeWithoutSpaces;
     }
 
-    public int getWordSize() {
-        return wordSize;
+    public int getWordSizeWithoutSpaces() {
+        return wordSizeWithoutSpaces;
     }
 
     private int life = 6;
@@ -83,12 +75,12 @@ public class Player {
         //se for espaço vazio (enter)
         letter = reader.readLine().toLowerCase();
 
-        if (letter.isEmpty()) {
+        if (letter.trim().isEmpty()) {
             System.out.println("tem que escrever alguma letra");
             playerEnterInput();
         }
         if (letter.length() > 1) {
-            System.out.println("escreva apenas uma letra");
+            System.out.println("Escreva apenas uma letra");
             playerEnterInput();
         }
         return letter;

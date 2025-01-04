@@ -10,10 +10,13 @@ public class Main {
 
         Game game = new Game(player.writeTheWord(), player);
 
-        System.out.println(player.countSpace());
+        player.clearConsole();
+
+        player.countWordWithoutSpaces();
+
         //jogador 2 escreve uma letra e jogo faz a comparação
         System.out.println("jogador 2 escreva a primeira letra: ");
-        game.playGame();
-        game.showPlayerStatus();
+        game.playGame(player);
+        game.showPlayerStatus(player);
     }
 }
