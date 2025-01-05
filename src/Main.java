@@ -35,7 +35,7 @@ public class Main {
 
                 ReadLine readLine = new ReadLine();
                 //o jogo escolhe uma palavra aleatoria de um ficheiro
-                Game game2 = new Game(readLine.readASpecificLine(), player,readLine);
+                Game game2 = new Game(readLine.readASpecificLine(),player);
 
 
                 System.out.println("jogador 2 escreva a primeira letra: ");
