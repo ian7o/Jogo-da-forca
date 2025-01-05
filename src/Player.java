@@ -30,23 +30,9 @@ public class Player {
             System.out.println();
         }
     }
-    private int wordSizeWithoutSpaces;
-
-    public int countWordWithoutSpaces() {
-        wordSizeWithoutSpaces = word.length();
-        for (int i = 0; i < word.length(); i++) {
-            if (Character.isSpaceChar(word.charAt(i))) {
-                wordSizeWithoutSpaces--;
-            }
-        }
-        return wordSizeWithoutSpaces;
-    }
-
-    public int getWordSizeWithoutSpaces() {
-        return wordSizeWithoutSpaces;
-    }
 
     private int life = 6;
+
     private int correctLetters = 0;
 
     public int getLife() {

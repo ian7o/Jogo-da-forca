@@ -5,17 +5,10 @@ import java.util.List;
 public class Game {
     String word;
     Player player;
-    ReadLine readLine;
 
     public Game(String word, Player player) {
         this.word = word;
         this.player = player;
-    }
-
-    public Game(String word, Player player, ReadLine readLine){
-        this.word=word;
-        this.player=player;
-        this.readLine=readLine;
     }
 
     private List<String> registeredLetters = new ArrayList<>();
@@ -28,147 +21,77 @@ public class Game {
         }
     }
 
+    CountHelper countHelper = new CountHelper();
+
+    int lettersCount = 0;
+
     public void playGame(Player player) throws IOException {
         PrepareSecreteWord(secreteGameWordState);
 
-        //se a opção escolhida for jogar contra outro jogador
-        switch (player.getChoseOption()) {
-            case "1":
-                //enquanto o jogador estiver vivo ou não acertar todas as letras da palavra o jogo continua
-                player.countWordWithoutSpaces();
-                while (player.getLife() != 0 && player.getCorrectLettersQuantity() != player.getWordSizeWithoutSpaces()) {
-                    //escreve apenas se a lista não estiver vazia
-                    if (!registeredLetters.isEmpty()) {
-                        System.out.println("Escreva outra letra:");
-                    }
-                    player.playerEnterInput();
+        while (player.getLife() != 0 && player.getCorrectLettersQuantity() != countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount)) {
+            //escreve apenas se a lista não estiver vazia
+            if (!registeredLetters.isEmpty()) {
+                System.out.println("Escreva outra letra:");
+            }
 
-                    //se a letra já foi registrada
-                    if (registeredLetters.contains(player.getPlayerLetter())) {
-                        System.out.println("Já tentou com esta letra tenta outra letra");
-                        System.out.println();
-                    } else {
-                        //primeiro adiciona a letra para a lista de letras registradas
-                        registeredLetters.add(player.getPlayerLetter());
+            player.playerEnterInput();
 
-                        // se a letra do player conter na palavra
-                        if (word.contains(player.getPlayerLetter())) {
-                            System.out.println();
-                            System.out.println("Tem a letra na palavra");
+            //se a letra já foi registrada
+            if (registeredLetters.contains(player.getPlayerLetter())) {
+                System.out.println("Já tentou com esta letra tenta outra letra");
+                System.out.println();
+            } else {
+                //primeiro adiciona a letra para a lista de letras registradas
+                registeredLetters.add(player.getPlayerLetter());
 
-                            // vai em posição em posição e verifica se a letra digitada é igual a palavra
-                            for (int i = 0; i < word.length(); i++) {
-
-                                // se a palavra conter um espaço substitui o traço por um espaço
-                                if (!Character.isLetter(word.charAt(i))) {
-                                    secreteGameWordState.set(i, " ");
-                                }
-
-                                // se a letra da palavra for igual a letra do jogador substitui o - pela a letra no espaço correto
-                                if (word.charAt(i) == player.getPlayerLetter().charAt(0)) {
-                                    secreteGameWordState.set(i, player.getPlayerLetter());
-                                    player.increaseCorrectLettersQuantity();
-                                }
-                            }
-                        } else {
-                            // se nao contem a letra na palvra
-                            player.decreaseLife();
-                            System.out.println("Nao tem a letra na palavra");
-                            System.out.println("Vidas restantes:" + player.getLife());
-                            System.out.println();
-                        }
-                        //imprimindo a forca
-                        System.out.print("A palavra é ");
-                        secreteGameWordState.forEach(i -> System.out.print(i));
-                        System.out.println();
+                for (int i = 0; i < word.length(); i++) {
+                    // se a palavra conter um espaço substitui o traço por um espaço
+                    if (!Character.isLetter(word.charAt(i))) {
+                        secreteGameWordState.set(i, " ");
                     }
                 }
 
-                break;
-            //caso o jogador escolha jogar contra o computador
-            case "2":
-                readLine.countWordWithoutSpacesOrSpecialCaracter();
+                // se a letra do player conter na palavra
+                if (word.contains(player.getPlayerLetter())) {
+                    System.out.println();
+                    System.out.println("Tem a letra na palavra");
+                    // vai em posição em posição e verifica se a letra digitada é igual a palavra
+                    for (int i = 0; i < word.length(); i++) {
 
-                while (player.getLife() != 0 && player.getCorrectLettersQuantity() != readLine.getWordSizeWithoutSpaces()) {
-                    //escreve apenas se a lista não estiver vazia
-                    if (!registeredLetters.isEmpty()) {
-                        System.out.println("Escreva outra letra:");
-                    }
-                    player.playerEnterInput();
-
-                    //se a letra já foi registrada
-                    if (registeredLetters.contains(player.getPlayerLetter())) {
-                        System.out.println("Já tentou com esta letra tenta outra letra");
-                        System.out.println();
-                    } else {
-                        //primeiro adiciona a letra para a lista de letras registradas
-                        registeredLetters.add(player.getPlayerLetter());
-
-                        // se a letra do player conter na palavra
-                        if (word.contains(player.getPlayerLetter())) {
-                            System.out.println();
-                            System.out.println("Tem a letra na palavra");
-                            // vai em posição em posição e verifica se a letra digitada é igual a palavra
-                            for (int i = 0; i < word.length(); i++) {
-
-                                // se a palavra conter um espaço substitui o traço por um espaço
-                                if (!Character.isLetter(word.charAt(i))) {
-                                    secreteGameWordState.set(i, " ");
-                                }
-
-                                // se a letra da palavra for igual a letra do jogador substitui o - pela a letra no espaço correto
-                                if (word.charAt(i) == player.getPlayerLetter().charAt(0)) {
-                                    secreteGameWordState.set(i, player.getPlayerLetter());
-                                    player.increaseCorrectLettersQuantity();
-                                }
-                            }
-                        } else {
-                            // se nao contem a letra na palvra
-                            player.decreaseLife();
-                            System.out.println("Nao tem a letra na palavra");
-                            System.out.println("Vidas restantes:" + player.getLife());
-                            System.out.println();
+                        // se a letra da palavra for igual a letra do jogador substitui o - pela a letra no espaço correto
+                        if (word.charAt(i) == player.getPlayerLetter().charAt(0)) {
+                            secreteGameWordState.set(i, player.getPlayerLetter());
+                            player.increaseCorrectLettersQuantity();
                         }
-                        //imprimindo a forca
-                        System.out.print("A palavra é ");
-                        secreteGameWordState.forEach(i -> System.out.print(i));
-                        System.out.println();
                     }
+                } else {
+                    // se nao contem a letra na palvra
+                    player.decreaseLife();
+                    System.out.println("Nao tem a letra na palavra");
+                    System.out.println("Vidas restantes:" + player.getLife());
+                    System.out.println();
                 }
-
-                break;
+                //imprimindo a forca
+                System.out.print("A palavra é ");
+                secreteGameWordState.forEach(i -> System.out.print(i));
+                System.out.println();
+            }
         }
+
 
     }
 
     public void showPlayerStatus(Player player) {
-        switch (player.getChoseOption()){
-            case "1":
-                // mudar para a palavra
-                System.out.println("Acertou:" + player.getCorrectLettersQuantity() + " letras de " + player.getWordSizeWithoutSpaces());
-                // se a quantidade de letras corretas for igual ao tamanho da palavra o jogador vence
-                if (player.getCorrectLettersQuantity() == player.getWordSizeWithoutSpaces()) {
-                    System.out.println("O jogador 2 venceu!!!");
-                }
-                // se a vida do jogador for 0 ele perde
-                if (player.getLife() == 0) {
-                    System.out.println("Jogador 2 foi enforcado");
-                }
-                break;
-
-            case "2":
-                // mudar para a palavra
-                System.out.println("Acertou:" + player.getCorrectLettersQuantity() + " letras de " + word.length());
-                // se a quantidade de letras corretas for igual ao tamanho da palavra o jogador vence
-                if (player.getCorrectLettersQuantity() == player.getWordSizeWithoutSpaces()) {
-                    System.out.println("O jogador 2 venceu!!!");
-                }
-                // se a vida do jogador for 0 ele perde
-                if (player.getLife() == 0) {
-                    System.out.println("Jogador 2 foi enforcado");
-                    System.out.println("A palavra era " + word);
-                }
-                break;
+        // Para mostrar as estátisticas
+        System.out.println("Acertou:" + player.getCorrectLettersQuantity() + " letras de " + countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount));
+        // se a quantidade de letras corretas for igual ao tamanho da palavra o jogador vence
+        if (player.getCorrectLettersQuantity() == countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount)) {
+            System.out.println("O jogador 2 venceu!!!");
+        }
+        // se a vida do jogador for 0 ele perde
+        if (player.getLife() == 0) {
+            System.out.println("Jogador 2 foi enforcado");
+            System.out.println("A palavra era " + word);
         }
     }
 }

@@ -25,20 +25,4 @@ public class ReadLine {
         System.out.println(ChosenLineOfTipsFile);
         return ChosenLineOfWordsFile.toLowerCase();
     }
-
-    private int wordSizeWithoutSpaces;
-
-    public int getWordSizeWithoutSpaces() {
-        return wordSizeWithoutSpaces;
-    }
-
-    public int countWordWithoutSpacesOrSpecialCaracter() {
-        wordSizeWithoutSpaces = ChosenLineOfWordsFile.length();
-        for (int i = 0; i < ChosenLineOfWordsFile.length(); i++) {
-            if (!Character.isLetterOrDigit(ChosenLineOfWordsFile.charAt(i))) {
-                wordSizeWithoutSpaces--;
-            }
-        }
-        return wordSizeWithoutSpaces;
-    }
 }
