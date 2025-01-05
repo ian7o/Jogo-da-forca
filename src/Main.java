@@ -17,13 +17,13 @@ public class Main {
                 player.clearConsole();
 
                 System.out.println("jogador 1 escreva a palavra: ");
-                //jogo registra a palavra
 
+                //jogo registra a palavra
                 Game game = new Game(player.writeTheWord(), player);
 
                 player.clearConsole();
 
-                player.countWordWithoutSpaces();
+
                 //jogador 2 escreve uma letra e jogo faz a comparação
                 System.out.println("jogador 2 escreva a primeira letra: ");
                 game.playGame(player);
@@ -32,12 +32,11 @@ public class Main {
 
             case "2":
                 player.clearConsole();
+
                 ReadLine readLine = new ReadLine();
-
                 //o jogo escolhe uma palavra aleatoria de um ficheiro
-                Game game2 = new Game(readLine.readASpecificLine(), player);
+                Game game2 = new Game(readLine.readASpecificLine(), player,readLine);
 
-                readLine.countWordWithoutSpacesOrSpecialCaracter();
 
                 System.out.println("jogador 2 escreva a primeira letra: ");
                 game2.playGame(player);

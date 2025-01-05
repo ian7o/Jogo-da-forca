@@ -5,10 +5,17 @@ import java.util.List;
 public class Game {
     String word;
     Player player;
+    ReadLine readLine;
 
     public Game(String word, Player player) {
         this.word = word;
         this.player = player;
+    }
+
+    public Game(String word, Player player, ReadLine readLine){
+        this.word=word;
+        this.player=player;
+        this.readLine=readLine;
     }
 
     private List<String> registeredLetters = new ArrayList<>();
@@ -17,7 +24,7 @@ public class Game {
 
     public void PrepareSecreteWord(List<String> hangmanGame) {
         for (int i = 0; i < word.length(); i++) {
-            hangmanGame.add("-");
+            hangmanGame.add("_");
         }
     }
 
@@ -28,6 +35,7 @@ public class Game {
         switch (player.getChoseOption()) {
             case "1":
                 //enquanto o jogador estiver vivo ou não acertar todas as letras da palavra o jogo continua
+                player.countWordWithoutSpaces();
                 while (player.getLife() != 0 && player.getCorrectLettersQuantity() != player.getWordSizeWithoutSpaces()) {
                     //escreve apenas se a lista não estiver vazia
                     if (!registeredLetters.isEmpty()) {
@@ -79,8 +87,9 @@ public class Game {
                 break;
             //caso o jogador escolha jogar contra o computador
             case "2":
+                readLine.countWordWithoutSpacesOrSpecialCaracter();
 
-                while (player.getLife() != 0 && player.getCorrectLettersQuantity() != word.length()) {
+                while (player.getLife() != 0 && player.getCorrectLettersQuantity() != readLine.getWordSizeWithoutSpaces()) {
                     //escreve apenas se a lista não estiver vazia
                     if (!registeredLetters.isEmpty()) {
                         System.out.println("Escreva outra letra:");

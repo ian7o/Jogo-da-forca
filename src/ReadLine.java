@@ -28,6 +28,10 @@ public class ReadLine {
 
     private int wordSizeWithoutSpaces;
 
+    public int getWordSizeWithoutSpaces() {
+        return wordSizeWithoutSpaces;
+    }
+
     public int countWordWithoutSpacesOrSpecialCaracter() {
         wordSizeWithoutSpaces = ChosenLineOfWordsFile.length();
         for (int i = 0; i < ChosenLineOfWordsFile.length(); i++) {
