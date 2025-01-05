@@ -65,9 +65,6 @@ public class Player {
         return ++correctLetters;
     }
 
-    public Player() {
-
-    }
 
     private String letter;
 
