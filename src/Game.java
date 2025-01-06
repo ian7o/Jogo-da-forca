@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    String word;
-    Player player;
+    private String word;
+    private Player player;
 
     public Game(String word, Player player) {
         this.word = word;
@@ -21,9 +21,9 @@ public class Game {
         }
     }
 
-    CountHelper countHelper = new CountHelper();
+    CountLetterClass countHelper = new CountLetterClass();
 
-    int lettersCount = 0;
+    private int lettersCount = 0;
 
     public void playGame(Player player) throws IOException {
         PrepareSecreteWord(secreteGameWordState);
@@ -31,6 +31,7 @@ public class Game {
         while (player.getLife() != 0 && player.getCorrectLettersQuantity() != countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount)) {
             //escreve apenas se a lista não estiver vazia
             if (!registeredLetters.isEmpty()) {
+                System.out.println();
                 System.out.println("Escreva outra letra:");
             }
 
@@ -53,7 +54,6 @@ public class Game {
 
                 // se a letra do player conter na palavra
                 if (word.contains(player.getPlayerLetter())) {
-                    System.out.println();
                     System.out.println("Tem a letra na palavra");
                     // vai em posição em posição e verifica se a letra digitada é igual a palavra
                     for (int i = 0; i < word.length(); i++) {
@@ -72,9 +72,9 @@ public class Game {
                     System.out.println();
                 }
                 //imprimindo a forca
+                System.out.println();
                 System.out.print("A palavra é ");
                 secreteGameWordState.forEach(i -> System.out.print(i));
-                System.out.println();
             }
         }
 
@@ -83,11 +83,14 @@ public class Game {
 
     public void showPlayerStatus(Player player) {
         // Para mostrar as estátisticas
-        System.out.println("Acertou:" + player.getCorrectLettersQuantity() + " letras de " + countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount));
-        // se a quantidade de letras corretas for igual ao tamanho da palavra o jogador vence
+        System.out.println();
+
+        System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letras de um total de " + countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount));
+
         if (player.getCorrectLettersQuantity() == countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount)) {
             System.out.println("O jogador 2 venceu!!!");
         }
+
         // se a vida do jogador for 0 ele perde
         if (player.getLife() == 0) {
             System.out.println("Jogador 2 foi enforcado");

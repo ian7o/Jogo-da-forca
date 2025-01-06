@@ -9,15 +9,16 @@ public class Player {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         word = reader.readLine().toLowerCase();
 
-        //se for espaço vazio (enter)
+        //Se for espaço vazio (enter)
         if (word.trim().isEmpty()) {
-            System.out.println("Tem que escrever alguma palavra");
+            System.out.println("Tem que escrever alguma palavra: ");
             writeTheWord();
         }
 
+        // Verifica se há algum caractere não permitido (tudo que não seja letra ou espaço)
         for (int i = 0; i < word.length(); i++) {
             if (!Character.isLetter(word.charAt(i)) && !Character.isSpaceChar(word.charAt(i))) {
-                System.out.println("Esse caractere não foi aceito escreva outro ");
+                System.out.println("Esse caractere " + word.charAt(i) + " não foi aceito. Por favor, escreva outra palavra:");
                 writeTheWord();
             }
         }
@@ -25,7 +26,7 @@ public class Player {
         return word.trim();
     }
 
-    public void clearConsole(){
+    public void clearConsole() {
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
@@ -54,8 +55,13 @@ public class Player {
 
     private String letter;
 
+    public String getPlayerLetter() {
+        return letter;
+    }
+
     public String playerEnterInput() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
         //se for espaço vazio (enter)
         letter = reader.readLine().toLowerCase();
 
@@ -70,10 +76,6 @@ public class Player {
         return letter;
     }
 
-    public String getPlayerLetter() {
-        return letter;
-    }
-
     private String choseOption;
 
     public String getChoseOption() {
@@ -82,16 +84,17 @@ public class Player {
 
     public String playerChoseGameMode() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        //se for espaço vazio (enter)
-        choseOption = reader.readLine().toLowerCase();
 
-        if (choseOption.trim().isEmpty()) {
-            System.out.println("tem que escrever alguma opção");
+        //se for espaço vazio (enter)
+        choseOption = reader.readLine().toLowerCase().trim();
+
+        if (choseOption.isEmpty()) {
+            System.out.println("Tem que escolher alguma opção");
             playerChoseGameMode();
         }
 
-        if (!Character.isDigit(choseOption.charAt(0))){
-            System.out.println("Esse caractere não foi aceito escreva outro");
+        if (!Character.isDigit(choseOption.charAt(0))) {
+            System.out.println("Esse caractere " + choseOption.charAt(0) + " não foi aceito escreva outro");
             playerChoseGameMode();
         }
         return choseOption;
