@@ -1,4 +1,5 @@
-public class CountHelper {
+public class CountLetterClass {
+//ou CountHelper
 
     public int countWordWithoutSpacesOrSpecialCaracter(String word,int letterCounter) {
         letterCounter = word.length();
@@ -10,4 +11,5 @@ public class CountHelper {
         }
         return letterCounter;
     }
+
 }

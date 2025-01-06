@@ -2,12 +2,12 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        System.out.println("Vamos jogar jogo da forca");
+        System.out.println("Jogo da forca começa");
         System.out.println();
         Player player = new Player();
-        System.out.println("escolha uma opção de jogo:");
+        System.out.println("Escolha uma opção de jogo:");
         System.out.println("Opção 1: Jogador versus Jogador");
-        System.out.println("Opção 2: Jogador versus computador");
+        System.out.println("Opção 2: Jogador versus Computador");
 
         player.playerChoseGameMode();
 
@@ -33,7 +33,7 @@ public class Main {
             case "2":
                 player.clearConsole();
 
-                ReadLine readLine = new ReadLine();
+                ReadLines readLine = new ReadLines();
                 //o jogo escolhe uma palavra aleatoria de um ficheiro
                 Game game2 = new Game(readLine.readASpecificLine(),player);
 
@@ -44,7 +44,8 @@ public class Main {
                 break;
 
             default:
-                System.out.println("está opção é invalida escolha outra");
+
+                System.out.println("Essa opção é inválida, escolha outra: ");
                 player.playerChoseGameMode();
         }
 

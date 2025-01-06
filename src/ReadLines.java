@@ -1,13 +1,13 @@
 import java.io.*;
 import java.nio.file.Files;
 
-public class ReadLine {
+public class ReadLines {
 
     private File wordsFile = new File("/Users/admin.ian.swerts/Jogo da forca ian/Words/Words.rtf");
 
     private File tipsFile = new File("/Users/admin.ian.swerts/Jogo da forca ian/Words/tipsDraft");
 
-    public ReadLine() throws IOException {
+    public ReadLines() throws IOException {
 
     }
 
@@ -15,14 +15,15 @@ public class ReadLine {
 
     private int randomLine = (int) (Math.random() * getNumbersOfLinesInFile);
 
-    String ChosenLineOfWordsFile;
-    String ChosenLineOfTipsFile;
+    private String ChosenLineOfWordsFile;
+    private String ChosenLineOfTipsFile;
 
     public String readASpecificLine() throws IOException {
         ChosenLineOfWordsFile = Files.readAllLines(wordsFile.toPath()).get(randomLine);
         ChosenLineOfTipsFile = Files.readAllLines(tipsFile.toPath()).get(randomLine);
 
         System.out.println(ChosenLineOfTipsFile);
+
         return ChosenLineOfWordsFile.toLowerCase();
     }
 }
