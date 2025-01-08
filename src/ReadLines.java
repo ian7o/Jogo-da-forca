@@ -22,7 +22,8 @@ public class ReadLines {
         ChosenLineOfWordsFile = Files.readAllLines(wordsFile.toPath()).get(randomLine);
         ChosenLineOfTipsFile = Files.readAllLines(tipsFile.toPath()).get(randomLine);
 
-        System.out.println(ChosenLineOfTipsFile);
+        System.out.println("Dica da palavra: " + ChosenLineOfTipsFile);
+        System.out.println();
 
         return ChosenLineOfWordsFile.toLowerCase();
     }

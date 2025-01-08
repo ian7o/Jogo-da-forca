@@ -1,13 +1,19 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Player {
     private String word;
 
-    public String writeTheWord() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        word = reader.readLine().toLowerCase();
+    public void startGame(){
+        System.out.println("Jogo da forca começa");
+        System.out.println();
+        System.out.println("Escolha uma opção de jogo:");
+        System.out.println("Opção 1: Jogador versus Jogador");
+        System.out.println("Opção 2: Jogador versus Computador");
+    }
+
+    public String writeTheWord() {
+        Scanner scanner = new Scanner(System.in);
+        word = scanner.nextLine().toLowerCase();
 
         //Se for espaço vazio (enter)
         if (word.trim().isEmpty()) {
@@ -59,11 +65,11 @@ public class Player {
         return letter;
     }
 
-    public String playerEnterInput() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public String playerEnterInput() {
+        Scanner scanner = new Scanner(System.in);
 
         //se for espaço vazio (enter)
-        letter = reader.readLine().toLowerCase();
+        letter = scanner.nextLine().toLowerCase();
 
         if (letter.trim().isEmpty()) {
             System.out.println("tem que escrever alguma letra");
@@ -82,11 +88,12 @@ public class Player {
         return choseOption;
     }
 
-    public String playerChoseGameMode() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public String playerChoseGameMode() {
+
+        Scanner scanner = new Scanner(System.in);
 
         //se for espaço vazio (enter)
-        choseOption = reader.readLine().toLowerCase().trim();
+        choseOption = scanner.nextLine().toLowerCase().trim();
 
         if (choseOption.isEmpty()) {
             System.out.println("Tem que escolher alguma opção");
@@ -99,4 +106,5 @@ public class Player {
         }
         return choseOption;
     }
+
 }
