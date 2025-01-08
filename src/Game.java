@@ -15,7 +15,11 @@ public class Game {
 
     private List<String> secreteGameWordState = new ArrayList<>();
 
-    public void PrepareSecreteWord(List<String> hangmanGame) {
+    public List<String> getSecreteGameWordState() {
+        return secreteGameWordState;
+    }
+
+    public void prepareSecreteWord(List<String> hangmanGame) {
         for (int i = 0; i < word.length(); i++) {
             hangmanGame.add("_");
         }
@@ -23,16 +27,36 @@ public class Game {
 
     CountLetterClass countHelper = new CountLetterClass();
 
-    private int lettersCount = 0;
+    public void playGame(Player player) {
 
-    public void playGame(Player player) throws IOException {
-        PrepareSecreteWord(secreteGameWordState);
+        prepareSecreteWord(secreteGameWordState);
 
-        while (player.getLife() != 0 && player.getCorrectLettersQuantity() != countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount)) {
-            //escreve apenas se a lista não estiver vazia
-            if (!registeredLetters.isEmpty()) {
+        while (player.getLife() != 0 && player.getCorrectLettersQuantity() != countHelper.countWordWithoutSpacesOrSpecialCaracter(word)) {
+
+            //Se a palavra tiver espaços ou um caractere especial
+            for (int i = 0; i < word.length(); i++) {
+                // se a palavra conter um espaço substitui o traço por um espaço
+                if (!Character.isLetter(word.charAt(i))) {
+                    secreteGameWordState.set(i, " ");
+                }
+            }
+
+            //Escreve  se a lista não estiver vazia
+            if (registeredLetters.isEmpty()){
+                System.out.println("Escreva a primeira letra");
+                System.out.print("A palavra é: ");
+                getSecreteGameWordState().forEach(s -> System.out.print(s));
+            }
+            else  {
                 System.out.println();
                 System.out.println("Escreva outra letra:");
+                System.out.print("A palavra é: ");
+                getSecreteGameWordState().forEach(s -> System.out.print(s));
+                //imprime o bonequinho
+                DrawHanged drawHanged = new DrawHanged();
+                System.out.println();
+                System.out.println();
+                drawHanged.DrawHanged(player);
             }
 
             player.playerEnterInput();
@@ -44,13 +68,6 @@ public class Game {
             } else {
                 //primeiro adiciona a letra para a lista de letras registradas
                 registeredLetters.add(player.getPlayerLetter());
-
-                for (int i = 0; i < word.length(); i++) {
-                    // se a palavra conter um espaço substitui o traço por um espaço
-                    if (!Character.isLetter(word.charAt(i))) {
-                        secreteGameWordState.set(i, " ");
-                    }
-                }
 
                 // se a letra do player conter na palavra
                 if (word.contains(player.getPlayerLetter())) {
@@ -69,12 +86,12 @@ public class Game {
                     player.decreaseLife();
                     System.out.println("Nao tem a letra na palavra");
                     System.out.println("Vidas restantes:" + player.getLife());
-                    System.out.println();
                 }
                 //imprimindo a forca
                 System.out.println();
-                System.out.print("A palavra é ");
-                secreteGameWordState.forEach(i -> System.out.print(i));
+//                System.out.print("A palavra é ");
+//                secreteGameWordState.forEach(System.out::print);
+                System.out.println();
             }
         }
 
@@ -85,9 +102,14 @@ public class Game {
         // Para mostrar as estátisticas
         System.out.println();
 
-        System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letras de um total de " + countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount));
+        if (player.getCorrectLettersQuantity()<2){
+            System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letra de um total de " + countHelper.countWordWithoutSpacesOrSpecialCaracter(word));
+        }
+        else {
+        System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letras de um total de " + countHelper.countWordWithoutSpacesOrSpecialCaracter(word));
+        }
 
-        if (player.getCorrectLettersQuantity() == countHelper.countWordWithoutSpacesOrSpecialCaracter(word, lettersCount)) {
+        if (player.getCorrectLettersQuantity() == countHelper.countWordWithoutSpacesOrSpecialCaracter(word)) {
             System.out.println("O jogador 2 venceu!!!");
         }
 
@@ -95,6 +117,10 @@ public class Game {
         if (player.getLife() == 0) {
             System.out.println("Jogador 2 foi enforcado");
             System.out.println("A palavra era " + word);
+
+            //Imprimindo o bonequinho
+            DrawHanged drawHanged = new DrawHanged();
+            drawHanged.DrawHanged(player);
         }
     }
 }
