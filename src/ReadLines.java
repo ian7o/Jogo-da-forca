@@ -18,7 +18,7 @@ public class ReadLines {
     private String ChosenLineOfWordsFile;
     private String ChosenLineOfTipsFile;
 
-    public String readASpecificLine() throws IOException {
+    public String readARandomLine() throws IOException {
         ChosenLineOfWordsFile = Files.readAllLines(wordsFile.toPath()).get(randomLine);
         ChosenLineOfTipsFile = Files.readAllLines(tipsFile.toPath()).get(randomLine);
 
