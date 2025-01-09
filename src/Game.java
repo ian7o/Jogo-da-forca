@@ -4,11 +4,63 @@ import java.util.List;
 
 public class Game {
     private String word;
-    private Player player;
+    private Player player = new Player();
 
-    public Game(String word, Player player) {
-        this.word = word;
-        this.player = player;
+    public void prepereGame() throws IOException {
+        player.startGame();
+        player.playerChoseGameMode();
+
+        switch (player.getChoseOption()) {
+            case "1":
+                player.clearConsole();
+
+                System.out.println("jogador 1 escreva a palavra: ");
+                //jogo registra a palavra
+                word = player.writeTheWord();
+
+                player.clearConsole();
+
+                //jogador 2 escreve uma letra e jogo faz a comparação
+                playGame(player);
+                showPlayerStatus(player);
+                break;
+
+            case "2":
+                player.clearConsole();
+
+                ReadLines readLine = new ReadLines();
+                //o jogo escolhe uma palavra aleatoria de um ficheiro
+                word = readLine.readASpecificLine();
+
+
+                System.out.println("jogador 2 escreva a primeira letra: ");
+                playGame(player);
+                showPlayerStatus(player);
+                break;
+
+            case "3":
+                System.out.println("Saindo");
+                System.exit(1);
+                player.clearConsole();
+                break;
+
+            default:
+
+                System.out.println("Essa opção é inválida, escolha outra: ");
+                prepereGame();
+        }
+    }
+
+
+    public int countWordWithoutSpacesOrSpecialCaracter(String word) {
+        int letterCounter = word.length();
+
+        for (int i = 0; i < word.length(); i++) {
+            if (!Character.isLetterOrDigit(word.charAt(i))) {
+                letterCounter--;
+            }
+        }
+        return letterCounter;
     }
 
     private List<String> registeredLetters = new ArrayList<>();
@@ -25,13 +77,11 @@ public class Game {
         }
     }
 
-    CountLetterClass countHelper = new CountLetterClass();
-
     public void playGame(Player player) {
 
         prepareSecreteWord(secreteGameWordState);
 
-        while (player.getLife() != 0 && player.getCorrectLettersQuantity() != countHelper.countWordWithoutSpacesOrSpecialCaracter(word)) {
+        while (player.getLife() != 0 && player.getCorrectLettersQuantity() != countWordWithoutSpacesOrSpecialCaracter(word)) {
 
             //Se a palavra tiver espaços ou um caractere especial
             for (int i = 0; i < word.length(); i++) {
@@ -42,12 +92,11 @@ public class Game {
             }
 
             //Escreve  se a lista não estiver vazia
-            if (registeredLetters.isEmpty()){
+            if (registeredLetters.isEmpty()) {
                 System.out.println("Escreva a primeira letra");
                 System.out.print("A palavra é: ");
                 getSecreteGameWordState().forEach(s -> System.out.print(s));
-            }
-            else  {
+            } else {
                 System.out.println();
                 System.out.println("Escreva outra letra:");
                 System.out.print("A palavra é: ");
@@ -102,14 +151,13 @@ public class Game {
         // Para mostrar as estátisticas
         System.out.println();
 
-        if (player.getCorrectLettersQuantity()<2){
-            System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letra de um total de " + countHelper.countWordWithoutSpacesOrSpecialCaracter(word));
-        }
-        else {
-        System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letras de um total de " + countHelper.countWordWithoutSpacesOrSpecialCaracter(word));
+        if (player.getCorrectLettersQuantity() < 2) {
+            System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letra de um total de " + countWordWithoutSpacesOrSpecialCaracter(word));
+        } else {
+            System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letras de um total de " + countWordWithoutSpacesOrSpecialCaracter(word));
         }
 
-        if (player.getCorrectLettersQuantity() == countHelper.countWordWithoutSpacesOrSpecialCaracter(word)) {
+        if (player.getCorrectLettersQuantity() == countWordWithoutSpacesOrSpecialCaracter(word)) {
             System.out.println("O jogador 2 venceu!!!");
         }
 

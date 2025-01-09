@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        IntializeGame intializeGame = new IntializeGame();
-        intializeGame.prepereGame();
+Game game = new Game();
+game.prepereGame();
     }
 }
