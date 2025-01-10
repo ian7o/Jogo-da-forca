@@ -7,14 +7,15 @@ public class Game {
     private Player player = new Player();
 
     public void startGame() throws IOException {
-        player.startGame();
-        player.playerChoseGameMode();
-
         System.out.println("Jogo da forca vai começar");
         System.out.println();
         System.out.println("Escolha uma opção de jogo:");
         System.out.println("Opção 1: Jogador versus Jogador");
         System.out.println("Opção 2: Jogador versus Computador");
+        System.out.println("Opção 3: Sair do jogo");
+        System.out.println();
+
+        player.playerChoseGameMode();
 
         switch (player.getChoseOption()) {
             case "1":
@@ -28,7 +29,7 @@ public class Game {
 
                 //jogador 2 escreve uma letra e jogo faz a comparação
                 playGame(player);
-                showPlayerStatus(player);
+                showPlayerStatus(word,player);
                 displayGameWordState(secreteGameWordState);
                 break;
 
@@ -41,7 +42,7 @@ public class Game {
                 word = readLine.readARandomLine();
 
                 playGame(player);
-                showPlayerStatus(player);
+                showPlayerStatus(word,player);
                 displayGameWordState(secreteGameWordState);
                 break;
 
@@ -80,11 +81,10 @@ public class Game {
         }
     }
 
-    public void replace(String word, List<String> hangmanGame) {
-        //Se a palavra tiver espaços ou um caractere especial
+    public void replaceSpacesAndHyphensIntoSpaces(String word, List<String> hangmanGame) {
+        // Substitui espaços e traços por espaços
         for (int i = 0; i < word.length(); i++) {
-            // se a palavra conter um espaço substitui o traço por um espaço
-            if (!Character.isLetter(word.charAt(i))) {
+            if (word.charAt(i) == ' ' || word.charAt(i) == '-') {
                 hangmanGame.set(i, " ");
             }
         }
@@ -116,7 +116,7 @@ public class Game {
     public void updateHangmanWithCorrectLetter(String word, Player player, List<String> hangmanGame){
         if (word.contains(player.getPlayerLetter())) {
             System.out.println("Tem a letra na palavra");
-            // vai em posição em posição e verifica se a letra digitada é igual a palavra
+            // vai em posição em posição e verifica se a letra digitada é igual a letra da palavra
             for (int i = 0; i < word.length(); i++) {
 
                 // se a letra da palavra for igual a letra do jogador substitui o - pela a letra no espaço correto
@@ -139,7 +139,7 @@ public class Game {
 
         while (player.getLife() > 0 && player.getCorrectLettersQuantity() < countWordWithoutSpacesOrSpecialCaracter(word)) {
 
-            remove(word, secreteGameWordState);
+            replaceSpacesAndHyphensIntoSpaces(word, secreteGameWordState);
 
             //Escreve se ainda não tiver letras registradas
             if (registeredPlayerLetters.isEmpty()) {
@@ -162,7 +162,7 @@ public class Game {
 
     }
 
-    public void showPlayerStatus(Player player) {
+    public void showPlayerStatus(String word, Player player) {
         // Para mostrar as estátisticas do jogador
         System.out.println();
 
