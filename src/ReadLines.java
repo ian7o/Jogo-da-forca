@@ -3,28 +3,30 @@ import java.nio.file.Files;
 
 public class ReadLines {
 
-    private File wordsFile = new File("/Users/admin.ian.swerts/Jogo da forca ian/Words/Words.rtf");
 
-    private File tipsFile = new File("/Users/admin.ian.swerts/Jogo da forca ian/Words/tipsDraft");
-
-    public ReadLines() throws IOException {
-
-    }
-
-    private int getNumbersOfLinesInFile = Files.readAllLines(wordsFile.toPath()).size();
-
-    private int randomLine = (int) (Math.random() * getNumbersOfLinesInFile);
-
-    private String ChosenLineOfWordsFile;
-    private String ChosenLineOfTipsFile;
+    private File wordsAndTipsFile = new File("/Users/admin.ian.swerts/Jogo da forca ian/Words/WordAndTips.csv");
 
     public String readARandomLine() throws IOException {
-        ChosenLineOfWordsFile = Files.readAllLines(wordsFile.toPath()).get(randomLine);
-        ChosenLineOfTipsFile = Files.readAllLines(tipsFile.toPath()).get(randomLine);
 
-        System.out.println("Dica da palavra: " + ChosenLineOfTipsFile);
-        System.out.println();
+        //Armazena as linhas do ficheiro
+        long totalLines = Files.lines(wordsAndTipsFile.toPath()).count();
 
-        return ChosenLineOfWordsFile.toLowerCase();
+        //Escolhe uma linha aleatoria com base no tamanho das linhas
+        int randomLine = (int) (Math.random() * totalLines);
+
+        //È atribuido na variavel a linha escolhida inteira
+        String chosenLine = Files.readAllLines(wordsAndTipsFile.toPath()).get(randomLine);
+
+        //A linha é separada em partes
+        String[] parts = chosenLine.split(";");
+
+        //A palavra é a primeira parte da frase
+        String word = parts[0];
+
+        //A dica é a segunda parte da frase
+        String tip = parts[1];
+        System.out.println("Dica da palavra: " + tip);
+
+        return word.trim().toLowerCase();
     }
 }
