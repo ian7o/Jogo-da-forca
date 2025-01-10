@@ -29,7 +29,7 @@ public class Game {
 
                 //jogador 2 escreve uma letra e jogo faz a comparação
                 playGame(player);
-                showPlayerStatus(word,player);
+                showPlayerStatus(word, player);
                 displayGameWordState(secreteGameWordState);
                 break;
 
@@ -42,7 +42,7 @@ public class Game {
                 word = readLine.readARandomLine();
 
                 playGame(player);
-                showPlayerStatus(word,player);
+                showPlayerStatus(word, player);
                 displayGameWordState(secreteGameWordState);
                 break;
 
@@ -100,20 +100,19 @@ public class Game {
         drawHanged.DrawHanged(player);
     }
 
-    public boolean isNewLetter(Player player){
+    public boolean isNewLetter(Player player) {
         //verificar se a letra já foi registrada
         if (registeredPlayerLetters.contains(player.getPlayerLetter())) {
             System.out.println("Já tentou com esta letra tenta outra letra");
             System.out.println();
             return false;
-        }
-        else {
+        } else {
             registeredPlayerLetters.add(player.getPlayerLetter());
             return true;
         }
     }
 
-    public void updateHangmanWithCorrectLetter(String word, Player player, List<String> hangmanGame){
+    public void updateHangmanWithCorrectLetter(String word, Player player, List<String> hangmanGame) {
         if (word.contains(player.getPlayerLetter())) {
             System.out.println("Tem a letra na palavra");
             // vai em posição em posição e verifica se a letra digitada é igual a letra da palavra
@@ -153,8 +152,8 @@ public class Game {
 
             player.playerEnterInput();
 
-            if (isNewLetter(player)){
-                updateHangmanWithCorrectLetter(word,player,secreteGameWordState);
+            if (isNewLetter(player)) {
+                updateHangmanWithCorrectLetter(word, player, secreteGameWordState);
                 System.out.println();
                 System.out.println();
             }
@@ -166,7 +165,7 @@ public class Game {
         // Para mostrar as estátisticas do jogador
         System.out.println();
 
-        if (player.getCorrectLettersQuantity() < 2) {
+        if (player.getCorrectLettersQuantity() == countWordWithoutSpacesOrSpecialCaracter(word)) {
             System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letra de um total de " + countWordWithoutSpacesOrSpecialCaracter(word));
         } else {
             System.out.println("Você acertou: " + player.getCorrectLettersQuantity() + " letras de um total de " + countWordWithoutSpacesOrSpecialCaracter(word));

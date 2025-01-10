@@ -3,14 +3,6 @@ import java.util.Scanner;
 public class Player {
     private String word;
 
-    public void startGame(){
-        System.out.println("Jogo da forca começa");
-        System.out.println();
-        System.out.println("Escolha uma opção de jogo:");
-        System.out.println("Opção 1: Jogador versus Jogador");
-        System.out.println("Opção 2: Jogador versus Computador");
-    }
-
     public String writeTheWord() {
         Scanner scanner = new Scanner(System.in);
         word = scanner.nextLine().toLowerCase();
