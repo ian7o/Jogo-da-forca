@@ -7,6 +7,7 @@ It is a simple, yet functional and fun hangman game.
 
 The project is aimed at solidifying knowledge and learning.
 
+
 (PT)
 
 criado por Ian Swerts(eu)
